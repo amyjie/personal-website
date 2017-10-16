@@ -1,0 +1,53 @@
+/* Contact Info in Card */
+#contact-info {
+	width: $box-width;
+	height: auto;
+	
+	margin: 0px auto;
+	z-index: 100;
+	display: inline-block;
+
+	top: 225px;
+	left: 0;
+	right: 0;
+	position: absolute;
+
+	color: $primary_color;
+
+	transition: 0.5s 0.0s;
+
+	span {
+		padding: 5px;
+		display: block;
+
+		font-size: 13px;
+		font-weight: 400;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+
+		opacity: 1;
+		cursor: pointer;
+
+		transition: 0.9s 0.1s;
+
+		&.copy-animation {
+			opacity: 0;
+			color: #AD3318;
+		}
+	}
+
+	&.active {
+		top: 750px;
+		left: 0;
+		right: 0;
+		position: absolute;
+
+		transition: 0.5s 0.0s;
+
+		span {
+			opacity: 0;
+
+			transition: 0.1s 0.0s;
+		}
+	}
+}

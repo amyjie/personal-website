@@ -1,0 +1,106 @@
+/* Large Initial */
+#name-box {
+	width: 100%;
+	min-width: $box-width;
+	
+	height: auto;
+	min-height: 60px;
+
+	margin: 0px auto;
+	z-index: 100;
+
+	top: 5px;
+	left: 0;
+	right: 0;  
+	position: absolute;
+
+	.initial {
+		width: 100%;
+	    height: auto;
+		margin: 20px auto 0 auto;
+
+		color: $primary-color;
+		font-size: 180px;
+		font-weight: 400;
+		line-height: 180px;
+	    font-family: "KaiTi", "楷体", STKaiti, "华文楷体", serif;
+
+	    cursor: pointer;
+		transition: 0.5s 0.0s;
+
+		left: 0;
+		right: 0;
+		position: absolute;
+	}
+
+	.name {
+		width: 0px;
+		height: 50px;
+		margin: 0;
+		overflow: hidden;
+
+		color: $primary-color;
+		font-size: 35px;
+	    line-height: 50px;
+	}
+
+	hr {
+		width: 0px;
+		display: block;
+		position: relative;
+		top: 33px;
+		left: 58px;
+		float: left;
+		opacity: 0.5;
+		border-color: $primary-color;
+	}
+
+	&.active {
+		.initial {
+			font-size: 50px;
+		    text-align: left;
+		    line-height: 50px;
+
+			width: 50px;
+			margin: 0 0 0 10px;
+
+			left: 0;
+			right: unset;
+			position: absolute;
+
+			transition: 0.5s 0.0s;
+		}
+
+		.name {
+			font-size: 35px;
+		    text-align: left;
+		    line-height: 50px;
+
+			width: 150px;
+			margin: 0;
+			overflow: hidden;
+			white-space: nowrap;
+
+			left: 65px;
+			position: absolute;
+
+			transition: 0.75s 0.6s;	
+		}
+
+		hr {
+			width: 150px;
+			display: block;
+			
+			top: 33px;
+			left: 68px;
+			position: relative;
+
+			float: left;
+			opacity: 0.5;
+			
+			border-color: $primary-color;
+
+			transition: 0.75s 0.5s;
+		}
+	}
+}

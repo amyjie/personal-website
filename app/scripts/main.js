@@ -1,76 +1,98 @@
-/*!
- *
- *  Web Starter Kit
- *  Copyright 2015 Google Inc. All rights reserved.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    https://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- *
- */
-/* eslint-env browser */
-(function() {
-  'use strict';
 
-  // Check to make sure service workers are supported in the current browser,
-  // and that the current page is accessed from a secure origin. Using a
-  // service worker from an insecure origin will trigger JS console errors. See
-  // http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features
-  var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
-      // [::1] is the IPv6 localhost address.
-      window.location.hostname === '[::1]' ||
-      // 127.0.0.1/8 is considered localhost for IPv4.
-      window.location.hostname.match(
-        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-      )
-    );
+/* Only allow the user to start the animation sequence once per item */
+var copyToClipboardLock = {
+	Copied: true
+};
 
-  if ('serviceWorker' in navigator &&
-      (window.location.protocol === 'https:' || isLocalhost)) {
-    navigator.serviceWorker.register('service-worker.js')
-    .then(function(registration) {
-      // updatefound is fired if service-worker.js changes.
-      registration.onupdatefound = function() {
-        // updatefound is also fired the very first time the SW is installed,
-        // and there's no need to prompt for a reload at that point.
-        // So check here to see if the page is already controlled,
-        // i.e. whether there's an existing service worker.
-        if (navigator.serviceWorker.controller) {
-          // The updatefound event implies that registration.installing is set:
-          // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
-          var installingWorker = registration.installing;
+function copyToClipboard(element) {
+	let text = element.textContent;
 
-          installingWorker.onstatechange = function() {
-            switch (installingWorker.state) {
-              case 'installed':
-                // At this point, the old content will have been purged and the
-                // fresh content will have been added to the cache.
-                // It's the perfect time to display a "New content is
-                // available; please refresh." message in the page's interface.
-                break;
+	/* Check the lock */
+	if(copyToClipboardLock[text] === true) { console.log("returned"); return; }
+	else { copyToClipboardLock[text] = true; }
 
-              case 'redundant':
-                throw new Error('The installing ' +
-                                'service worker became redundant.');
+	/* Create textArea */
+	let buffer = document.createElement("textarea");
+	buffer.style.position = "fixed";
+	document.body.appendChild(buffer);
 
-              default:
-                // Ignore
-            }
-          };
+	/* Add text to it and highlight it */
+	buffer.textContent = text; 
+	buffer.select();
+
+	/* Attempt to copy to clipboard */
+  	try {
+  		document.execCommand("copy");
+
+  		/* Animate copy sequence */
+  		element.classList.add("copy-animation");
+  		window.setTimeout(() => {
+  			element.textContent = "Copied";
+  			element.classList.remove("copy-animation");
+  			window.setTimeout(() => {
+  				element.classList.add("copy-animation");
+  				window.setTimeout(() => {
+  					element.textContent = text;
+  					element.classList.remove("copy-animation");
+			        copyToClipboardLock[text] = false;
+  				}, 300);
+  			}, 300);
+  		}, 300);
+    } 
+    catch(error) {
+        console.warn("Copy to clipboard failed.", error);
+        copyToClipboardLock[text] = false;
+    } 
+    finally {
+        document.body.removeChild(buffer);
+    }
+}
+
+/* Social Media Tabs */
+function setActiveTab(evt, index) {
+	let tabs = document.getElementsByClassName('tab');
+	Array.prototype.forEach.call(tabs, function(tab) {
+		tab.classList.remove('active');
+	});
+	evt.currentTarget.classList.add('active');
+
+	let links = document.getElementsByClassName('social-link');
+	Array.prototype.forEach.call(links, function(link) {
+		link.classList.remove('active');
+	});
+	links.item(index).classList.add('active');
+}
+
+/* Toggles the state */
+var elements = ['smokescreen', 'box-wrapper', 'box', 'name-box', 'contact-info', 'social-media'];
+var class_toggle = 'active';
+var menu_active = false;
+function toggleMenu() {
+    for(var i = 0; i < elements.length; i++)
+    {
+        if(menu_active)
+        {
+            document.getElementById(elements[i]).classList.remove(class_toggle);
         }
-      };
-    }).catch(function(e) {
-      console.error('Error during service worker registration:', e);
-    });
-  }
+        else
+        {
+            document.getElementById(elements[i]).classList.add(class_toggle);
+        }
 
-  // Your custom JavaScript goes here
-})();
+    }
+
+    var lines = document.getElementsByTagName('line');
+    for (i = 0; i < lines.length; i++)
+    {
+        if(menu_active)
+        {
+            lines[i].classList.remove(class_toggle);
+        }
+        else
+        {
+            lines[i].classList.add(class_toggle);
+        }
+    }
+
+    menu_active = !menu_active;
+}
