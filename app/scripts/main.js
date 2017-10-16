@@ -1,43 +1,42 @@
-
 /* Only allow the user to start the animation sequence once per item */
-var copyToClipboardLock = {
-	Copied: true
+let copyToClipboardLock = {
+  Copied: true
 };
 
 function copyToClipboard(element) {
-	let text = element.textContent;
+  let text = element.textContent;
 
-	/* Check the lock */
-	if(copyToClipboardLock[text] === true) { console.log("returned"); return; }
-	else { copyToClipboardLock[text] = true; }
+  /* Check the lock */
+  if(copyToClipboardLock[text] === true) { console.log("returned"); return; }
+  else { copyToClipboardLock[text] = true; }
 
-	/* Create textArea */
-	let buffer = document.createElement("textarea");
-	buffer.style.position = "fixed";
-	document.body.appendChild(buffer);
+  /* Create textArea */
+  let buffer = document.createElement("textarea");
+  buffer.style.position = "fixed";
+  document.body.appendChild(buffer);
 
-	/* Add text to it and highlight it */
-	buffer.textContent = text; 
-	buffer.select();
+  /* Add text to it and highlight it */
+  buffer.textContent = text; 
+  buffer.select();
 
-	/* Attempt to copy to clipboard */
-  	try {
-  		document.execCommand("copy");
+  /* Attempt to copy to clipboard */
+    try {
+      document.execCommand("copy");
 
-  		/* Animate copy sequence */
-  		element.classList.add("copy-animation");
-  		window.setTimeout(() => {
-  			element.textContent = "Copied";
-  			element.classList.remove("copy-animation");
-  			window.setTimeout(() => {
-  				element.classList.add("copy-animation");
-  				window.setTimeout(() => {
-  					element.textContent = text;
-  					element.classList.remove("copy-animation");
-			        copyToClipboardLock[text] = false;
-  				}, 300);
-  			}, 300);
-  		}, 300);
+      /* Animate copy sequence */
+      element.classList.add("copy-animation");
+      window.setTimeout(() => {
+        element.textContent = "Copied";
+        element.classList.remove("copy-animation");
+        window.setTimeout(() => {
+          element.classList.add("copy-animation");
+          window.setTimeout(() => {
+            element.textContent = text;
+            element.classList.remove("copy-animation");
+              copyToClipboardLock[text] = false;
+          }, 300);
+        }, 300);
+      }, 300);
     } 
     catch(error) {
         console.warn("Copy to clipboard failed.", error);
