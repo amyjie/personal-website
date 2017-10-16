@@ -1,17 +1,19 @@
 /* Only allow the user to start the animation sequence once per item */
-let copyToClipboardLock = {
+var copyToClipboardLock = {
   Copied: true
 };
 
-function copyToClipboard(element) {
-  let text = element.textContent;
+/* onclick function for elements allowing themselves to be copied */
+function copyToClipboard(event) {
+  var element = event.currentTarget;
+  var text = element.textContent;
 
   /* Check the lock */
-  if(copyToClipboardLock[text] === true) { console.log("returned"); return; }
+  if (copyToClipboardLock[text] === true) { console.log("returned"); return; }
   else { copyToClipboardLock[text] = true; }
 
   /* Create textArea */
-  let buffer = document.createElement("textarea");
+  var buffer = document.createElement("textarea");
   buffer.style.position = "fixed";
   document.body.appendChild(buffer);
 
@@ -25,12 +27,12 @@ function copyToClipboard(element) {
 
       /* Animate copy sequence */
       element.classList.add("copy-animation");
-      window.setTimeout(() => {
+      window.setTimeout(function() {
         element.textContent = "Copied";
         element.classList.remove("copy-animation");
-        window.setTimeout(() => {
+        window.setTimeout(function() {
           element.classList.add("copy-animation");
-          window.setTimeout(() => {
+          window.setTimeout(function() {
             element.textContent = text;
             element.classList.remove("copy-animation");
               copyToClipboardLock[text] = false;
@@ -47,15 +49,22 @@ function copyToClipboard(element) {
     }
 }
 
-/* Social Media Tabs */
+/* Set copyToClipboard onclick to all 'copyable' elements */
+var copyable_elements = document.getElementsByClassName('copyable');
+for (var i = 0; i < copyable_elements.length; i++) {
+  console.log(copyable_elements.item(i));
+  copyable_elements.item(i).addEventListener('click', copyToClipboard);
+}
+
+ // Social Media Tabs 
 function setActiveTab(evt, index) {
-	let tabs = document.getElementsByClassName('tab');
+	var tabs = document.getElementsByClassName('tab');
 	Array.prototype.forEach.call(tabs, function(tab) {
 		tab.classList.remove('active');
 	});
 	evt.currentTarget.classList.add('active');
 
-	let links = document.getElementsByClassName('social-link');
+	var links = document.getElementsByClassName('social-link');
 	Array.prototype.forEach.call(links, function(link) {
 		link.classList.remove('active');
 	});
@@ -63,9 +72,9 @@ function setActiveTab(evt, index) {
 }
 
 /* Toggles the state */
-var elements = ['smokescreen', 'box-wrapper', 'box', 'name-box', 'contact-info', 'social-media'];
+var elements = ['box-wrapper', 'box', 'name-box', 'contact-info', 'social-media'];
 var class_toggle = 'active';
-var menu_active = false;
+var menu_active = true;
 function toggleMenu() {
     for(var i = 0; i < elements.length; i++)
     {
@@ -95,3 +104,5 @@ function toggleMenu() {
 
     menu_active = !menu_active;
 }
+
+window.setTimeout(toggleMenu, 500);

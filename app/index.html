@@ -4,46 +4,47 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>AdHackers Club</title>
-        <meta name="description" content="">
+        <meta name="description" content="Amy Jie's personal website. It has my contact information and links to my social accounts. May god have mercy on your soul.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png?v=rMlgramLYK">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png?v=rMlgramLYK">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png?v=rMlgramLYK">
+        <link rel="manifest" href="/images/favicons/manifest.json?v=rMlgramLYK">
+        <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg?v=rMlgramLYK" color="#2c3e50">
+        <link rel="shortcut icon" href="/images/favicons/favicon.ico?v=rMlgramLYK">
+        <meta name="msapplication-config" content="/images/favicons/browserconfig.xml?v=rMlgramLYK">
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" type="text/css" href="styles/main.css" />
     </head>
     <body>
-        <!-- Blackout curtain for active state -->
-        <div id="smokescreen"></div>
-
         <!-- Animated Box for static state -->
-        <div id="box-wrapper">
-            <div id="box">
+        <div id="box-wrapper" class="active">
+            <div id="box" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <line class="line top" x1="0" y1="0" x2="900" y2="0"></line>
-                    <line class="line left" x1="0" y1="460" x2="0" y2="-920"></line>
-                    <line class="line bottom" x1="300" y1="400" x2="-600" y2="400"></line>
-                    <line class="line right" x1="300" y1="0" x2="300" y2="1380"></line>
+                    <line class="line active top" x1="0" y1="0" x2="900" y2="0"></line>
+                    <line class="line active left" x1="0" y1="460" x2="0" y2="-920"></line>
+                    <line class="line active bottom" x1="300" y1="400" x2="-600" y2="400"></line>
+                    <line class="line active right" x1="300" y1="0" x2="300" y2="1380"></line>
                 </svg>     
             </div>
         </div>
 
         <!-- Initial + Active Title Bar -->
-        <div id="name-box">
-            <div class="unselectable initial" onclick="toggleMenu()">杰</div>
-            <div class="unselectable name">Projects</div>
-            <hr />
+        <div id="name-box" class="active">
+            <div class="unselectable initial">杰</div>
         </div>
 
         <!-- Contact Info -->
-        <div id="contact-info">
-            <span class="unselectable" onclick="copyToClipboard(this)">Amy Jie</span>
-            <span class="unselectable" onclick="copyToClipboard(this)">amy@adhackers.club</span>
-            <span class="unselectable" onclick="copyToClipboard(this)">408&middot;507&middot;3572</span>
+        <div id="contact-info" class="active">
+            <span class="unselectable copyable">Amy Jie</span>
+            <span class="unselectable copyable">amy@adhackers.club</span>
+            <span class="unselectable copyable">408&middot;507&middot;3572</span>
         </div>
 
         <!--Social Media-->
-        <div id="social-media">
+        <div id="social-media" class="active">
             <div id="tabs">
                 <div class="tab" onclick="setActiveTab(event, 0)">
                     <img src="images/icons/twitter.png" />
