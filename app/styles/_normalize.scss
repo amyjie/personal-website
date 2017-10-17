@@ -10,3 +10,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
    -ms-user-select: none;
    user-select: none;
 }
+
+a:visited {
+	border: none;
+	color: inherit;
+}

@@ -72,7 +72,7 @@ function setActiveTab(evt, index) {
 }
 
 /* Toggles the state */
-var elements = ['box-wrapper', 'box', 'name-box', 'contact-info', 'social-media'];
+var elements = ['box-wrapper', 'box', 'name-box', 'contact-info', 'social-media', 'links'];
 var class_toggle = 'active';
 var menu_active = true;
 function toggleMenu() {
