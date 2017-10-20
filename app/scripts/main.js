@@ -9,21 +9,26 @@ function copyToClipboard(event) {
   var text = element.textContent;
 
   /* Check the lock */
-  if (copyToClipboardLock[text] === true) { console.log("returned"); return; }
+  if (copyToClipboardLock[text] === true) { return; }
   else { copyToClipboardLock[text] = true; }
 
   /* Create textArea */
   var buffer = document.createElement("textarea");
   buffer.style.position = "fixed";
+  buffer.style.top = 0;
+  buffer.style.height = 0;
+  buffer.readOnly = true;
+
   document.body.appendChild(buffer);
 
   /* Add text to it and highlight it */
-  buffer.textContent = text; 
+  buffer.textContent = text;
   buffer.select();
 
   /* Attempt to copy to clipboard */
     try {
       document.execCommand("copy");
+      document.body.removeChild(buffer);
 
       /* Animate copy sequence */
       element.classList.add("copy-animation");
@@ -43,10 +48,8 @@ function copyToClipboard(event) {
     catch(error) {
         console.warn("Copy to clipboard failed.", error);
         copyToClipboardLock[text] = false;
-    } 
-    finally {
         document.body.removeChild(buffer);
-    }
+    } 
 }
 
 /* Set copyToClipboard onclick to all 'copyable' elements */
