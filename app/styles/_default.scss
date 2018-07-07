@@ -1,7 +1,7 @@
 /* Contains the styling for the default page view displaying the contact information */
 
 $box-width: 300px;
-$box-height: 400px;
+$box-height: 300px;
 
 /* Styling and animations for the SVG box */
 @import 'default/box';
@@ -11,9 +11,6 @@ $box-height: 400px;
 
 /* Styling and animtion for my contact info */
 @import 'default/contact-info';
-
-/* Styling and animation for the social media tabs */
-@import 'default/social-media';
 
 /* Links list below the contact box */
 @import 'default/links';

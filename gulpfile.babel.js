@@ -13,14 +13,6 @@ import pkg from './package.json';
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-// Lint JavaScript
-// gulp.task('lint', () =>
-//   gulp.src(['app/scripts/**/*.js','!node_modules/**'])
-//     .pipe($.eslint())
-//     .pipe($.eslint.format())
-//     .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
-// );
-
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')

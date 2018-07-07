@@ -59,23 +59,8 @@ for (var i = 0; i < copyable_elements.length; i++) {
   copyable_elements.item(i).addEventListener('click', copyToClipboard);
 }
 
- // Social Media Tabs 
-function setActiveTab(evt, index) {
-	var tabs = document.getElementsByClassName('tab');
-	Array.prototype.forEach.call(tabs, function(tab) {
-		tab.classList.remove('active');
-	});
-	evt.currentTarget.classList.add('active');
-
-	var links = document.getElementsByClassName('social-link');
-	Array.prototype.forEach.call(links, function(link) {
-		link.classList.remove('active');
-	});
-	links.item(index).classList.add('active');
-}
-
 /* Toggles the state */
-var elements = ['box-wrapper', 'box', 'name-box', 'contact-info', 'social-media', 'links'];
+var elements = ['box-wrapper', 'box', 'name-box', 'contact-info', 'links'];
 var class_toggle = 'active';
 var menu_active = true;
 function toggleMenu() {

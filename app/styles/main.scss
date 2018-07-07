@@ -2,12 +2,10 @@
 
 @import 'normalize';
 @import 'default';
-@import 'active';
 
 body {
-    text-align: center;
-
-    background-color: #333;
+  text-align: center;
+  background-color: #2C303A;
 
 	transition: all 0.4s 0.5s;
 }

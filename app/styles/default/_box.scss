@@ -56,11 +56,11 @@
 		transition: all 0.8s 0.2s ease-in-out;
 
 		&.top, &.bottom {
-			stroke-dasharray: 330 600;
+			stroke-dasharray: 300 600;
 		}
 
 		&.left, &.right {
-			stroke-dasharray: 490 920;
+			stroke-dasharray: 300 600;
 		}
 	}
 
@@ -77,11 +77,11 @@
 			}
 
 			&.left {
-				transform: translateY(920px);
+				transform: translateY(600px);
 			}
 
 			&.right {
-				transform: translateY(-920px);
+				transform: translateY(-600px);
 			}
 		}
 	}
